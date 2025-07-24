@@ -59,6 +59,16 @@ int PrintFmt(const char *format, ...);
 int AddPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly);
 
 /**
+ * @brief Subtract two polynomials. poly <- poly1 - poly2
+ * 
+ * @param poly1 
+ * @param poly2 
+ * @param poly 
+ * @return int 
+ */
+int SubtrPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly);
+
+/**
  * @brief Multiply two polynomials. poly <- poly1 * poly2
  * 
  * @param poly1 Polynomial to multiply

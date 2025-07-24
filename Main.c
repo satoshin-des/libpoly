@@ -18,6 +18,8 @@ int main()
     PrintFmt("f=%p\n", f);
     PrintFmt("g=%p\n", g);
     PrintFmt("h=%p\n", h);
+    SubtrPoly(f, g, &h);
+    PrintFmt("h=%p\n", h);
     MulPoly(f, g, &h);
     PrintFmt("h=%p\n", h);
     MulScalar(10, f, &h);
