@@ -8,7 +8,7 @@ int SubtrPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
         res = InitPoly(poly, poly1.deg);
         if (res == EXIT_FAILURE)
         {
-            perror("InitPoly failed @AddPoly");
+            perror("InitPoly failed @SubtrPoly");
             return EXIT_FAILURE;
         }
     }
@@ -17,7 +17,7 @@ int SubtrPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
         res = InitPoly(poly, poly2.deg);
         if (res == EXIT_FAILURE)
         {
-            perror("InitPoly failed @AddPoly");
+            perror("InitPoly failed @SubtrPoly");
             return EXIT_FAILURE;
         }
     }

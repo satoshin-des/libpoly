@@ -37,4 +37,6 @@ int AddPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
             poly->coeff[i] = poly1.coeff[i];
         }
     }
+
+    return EXIT_SUCCESS;
 }

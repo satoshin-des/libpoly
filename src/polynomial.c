@@ -60,7 +60,7 @@ int PrintFmt(const char *format, ...)
                     }
                     else if (poly.coeff[i] < 0)
                     {
-                        res = printf("-%lf*x^%ld", poly.coeff[i], i);
+                        res = printf("%lf*x^%ld", poly.coeff[i], i);
                     }
                 }
                 else if (i == 0)
@@ -71,7 +71,7 @@ int PrintFmt(const char *format, ...)
                     }
                     else if (poly.coeff[i] < 0)
                     {
-                        res = printf("-%lf", poly.coeff[i]);
+                        res = printf("%lf", poly.coeff[i]);
                     }
                 }
                 else
@@ -82,7 +82,7 @@ int PrintFmt(const char *format, ...)
                     }
                     else if (poly.coeff[i] < 0)
                     {
-                        res = printf("-%lf*x^%ld", poly.coeff[i], i);
+                        res = printf("%lf*x^%ld", poly.coeff[i], i);
                     }
                 }
 

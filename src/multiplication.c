@@ -7,7 +7,7 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
     res = InitPoly(poly, poly1.deg + poly2.deg);
     if (res == EXIT_FAILURE)
     {
-        perror("InitPoly failed @AddPoly");
+        perror("InitPoly failed @MulPoly");
         return EXIT_FAILURE;
     }
 
@@ -35,7 +35,7 @@ int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly)
     res = InitPoly(poly, poly1.deg);
     if (res == EXIT_FAILURE)
     {
-        perror("InitPoly failed @AddPoly");
+        perror("InitPoly failed @MulScalar");
         return EXIT_FAILURE;
     }
 
