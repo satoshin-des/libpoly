@@ -8,19 +8,14 @@
 
 int InitPoly(Polynomial *poly, const long deg)
 {
-    if (deg <= -1)
-    {
-        return -1;
-    }
-
     poly->deg = deg;
     poly->coeff = (double *)malloc((deg + 1) * sizeof(double));
     if(poly->coeff == NULL)
     {
-        fprintf(stderr, "malloc:error(%d) @InitPoly\n", errno);
+        perror("malloc failed @InitPoly");
         return -1;
     }
-    
+
     poly->val = 'x';
 
     return 0;
@@ -77,7 +72,7 @@ int PrintFmt(const char *format, ...)
 
                 if (res < 0)
                 {
-                    fprintf(stderr, "printf:error(%d) @PrintFmt\n", errno);
+                    perror("printf failed @PrintFmt");
                     return -1;
                 }
             }
@@ -88,7 +83,7 @@ int PrintFmt(const char *format, ...)
             res = putchar(*format);
             if ((res < 0) || (res == EOF))
             {
-                fprintf(stderr, "putchar:error(%d) @PrintFmt\n", errno);
+                perror("putchar failed @PrintFmt");
                 return -1;
             }
 
