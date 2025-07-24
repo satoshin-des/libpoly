@@ -16,9 +16,14 @@ int InitPoly(Polynomial *poly, const long deg)
         return -1;
     }
 
-    poly->val = 'x';
+    poly->var = 'x';
 
     return 0;
+}
+
+void SetVar(Polynomial *poly, const char var)
+{
+    poly->var = var;
 }
 
 int PrintFmt(const char *format, ...)

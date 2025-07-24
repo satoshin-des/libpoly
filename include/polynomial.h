@@ -12,7 +12,7 @@ typedef struct
 {
     long deg;
     double *coeff;
-    char val;
+    char var;
 } Polynomial;
 
 /**
@@ -23,6 +23,14 @@ typedef struct
  * @return int 0 if something error did not occur, -1 else
  */
 int InitPoly(Polynomial *poly, const long deg);
+
+/**
+ * @brief Set variable of polynomial (default variable is x)
+ * 
+ * @param poly Polynomial
+ * @param var variable character
+ */
+void SetVar(Polynomial *poly, const char var);
 
 /**
  * @brief Print
