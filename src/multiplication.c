@@ -28,3 +28,21 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
 
     return EXIT_SUCCESS;
 }
+
+int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly)
+{
+    int res;
+    res = InitPoly(poly, poly1.deg);
+    if (res == EXIT_FAILURE)
+    {
+        perror("InitPoly failed @AddPoly");
+        return EXIT_FAILURE;
+    }
+
+    for(long i = 0; i <= poly->deg; ++i)
+    {
+        poly->coeff[i] = scalar * poly1.coeff[i];
+    }
+
+    return EXIT_SUCCESS;
+}

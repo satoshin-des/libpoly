@@ -20,5 +20,8 @@ int main()
     PrintFmt("h=%p\n", h);
     MulPoly(f, g, &h);
     PrintFmt("h=%p\n", h);
+    MulScalar(10, f, &h);
+    PrintFmt("h=%p\n", h);
+
     return 0;
 }
