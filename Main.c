@@ -2,16 +2,23 @@
 
 int main()
 {
-    Polynomial f, g;
+    Polynomial f, g, h;
 
     InitPoly(&f, 3);
-    for(long i = 0; i < 4; ++i)
+    InitPoly(&g, 5);
+    for (long i = 0; i <= f.deg; ++i)
     {
         f.coeff[i] = i + 1;
     }
-    AddPoly(f, f, &g);
+    for (long i = 0; i <= g.deg; ++i)
+    {
+        g.coeff[i] = i + 7;
+    }
+    AddPoly(f, g, &h);
     PrintFmt("f=%p\n", f);
     PrintFmt("g=%p\n", g);
-
+    PrintFmt("h=%p\n", h);
+    MulPoly(f, g, &h);
+    PrintFmt("h=%p\n", h);
     return 0;
 }
