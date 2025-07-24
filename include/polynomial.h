@@ -25,6 +25,13 @@ typedef struct
 int InitPoly(Polynomial *poly, const long deg);
 
 /**
+ * @brief Clean polynomial
+ * 
+ * @param poly Polynomial
+ */
+void ClearPoly(Polynomial *poly);
+
+/**
  * @brief Set variable of polynomial (default variable is x)
  * 
  * @param poly Polynomial

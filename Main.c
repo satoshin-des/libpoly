@@ -23,5 +23,9 @@ int main()
     MulScalar(10, f, &h);
     PrintFmt("h=%p\n", h);
 
+    ClearPoly(&f);
+    ClearPoly(&g);
+    ClearPoly(&h);
+
     return 0;
 }

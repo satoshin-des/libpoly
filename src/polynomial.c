@@ -21,6 +21,17 @@ int InitPoly(Polynomial *poly, const long deg)
     return EXIT_SUCCESS;
 }
 
+void ClearPoly(Polynomial *poly)
+{
+    poly->deg = -1;
+    if(poly->coeff != NULL)
+    {
+        free(poly->coeff);
+        poly->coeff = NULL;
+    }
+    poly->var = 0;
+}
+
 void SetVar(Polynomial *poly, const char var)
 {
     poly->var = var;
