@@ -1,5 +1,7 @@
 #include "polynomial.h"
 
+#include <stdint.h>
+
 double LC(const Polynomial poly)
 {
     for (long i = poly.deg; i >= 0; --i)

@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
-#include <errno.h>
 
 int InitPoly(Polynomial *poly, const long deg)
 {

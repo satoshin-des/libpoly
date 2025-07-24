@@ -1,5 +1,7 @@
 #include "polynomial.h"
 
+#include <stdint.h>
+
 int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
 {
     long i, j, k;
