@@ -13,12 +13,12 @@ int InitPoly(Polynomial *poly, const long deg)
     if(poly->coeff == NULL)
     {
         perror("malloc failed @InitPoly");
-        return -1;
+        return EXIT_FAILURE;
     }
 
     poly->var = 'x';
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 void SetVar(Polynomial *poly, const char var)
@@ -78,7 +78,7 @@ int PrintFmt(const char *format, ...)
                 if (res < 0)
                 {
                     perror("printf failed @PrintFmt");
-                    return -1;
+                    return EXIT_FAILURE;
                 }
             }
             format += 2;
@@ -89,7 +89,7 @@ int PrintFmt(const char *format, ...)
             if ((res < 0) || (res == EOF))
             {
                 perror("putchar failed @PrintFmt");
-                return -1;
+                return EXIT_FAILURE;
             }
 
             ++format;
@@ -98,5 +98,5 @@ int PrintFmt(const char *format, ...)
 
     va_end(args);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

@@ -20,7 +20,7 @@ typedef struct
  *
  * @param poly Polynomial
  * @param deg Degree of polynomial
- * @return int 0 if something error did not occur, -1 else
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int InitPoly(Polynomial *poly, const long deg);
 
@@ -37,8 +37,18 @@ void SetVar(Polynomial *poly, const char var);
  * 
  * @param format 
  * @param ... 
- * @return int 0 if something error did not occur, -1 else
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int PrintFmt(const char *format, ...);
+
+/**
+ * @brief Add two polynomials. poly <- poly1 + poly2
+ * 
+ * @param poly1 Polynomial to add
+ * @param poly2 Polynomial to add
+ * @param poly Polynomial to be added
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int AddPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly);
 
 #endif // !POLYNOMIAL_H

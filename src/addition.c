@@ -1,0 +1,40 @@
+#include "polynomial.h"
+
+int AddPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
+{
+    int res;
+    if (poly1.deg > poly2.deg)
+    {
+        res = InitPoly(poly, poly1.deg);
+        if (res == EXIT_FAILURE)
+        {
+            perror("InitPoly failed @AddPoly");
+            return EXIT_FAILURE;
+        }
+    }
+    else
+    {
+        res = InitPoly(poly, poly2.deg);
+        if (res == EXIT_FAILURE)
+        {
+            perror("InitPoly failed @AddPoly");
+            return EXIT_FAILURE;
+        }
+    }
+
+    for (long i = 0; i <= poly->deg; ++i)
+    {
+        if ((i <= poly1.deg) && (i <= poly2.deg))
+        {
+            poly->coeff[i] = poly1.coeff[i] + poly2.coeff[i];
+        }
+        else if ((i > poly1.deg) && (i <= poly2.deg))
+        {
+            poly->coeff[i] = poly2.coeff[i];
+        }
+        else if ((i <= poly1.deg) && (i > poly2.deg))
+        {
+            poly->coeff[i] = poly1.coeff[i];
+        }
+    }
+}
