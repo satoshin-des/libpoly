@@ -49,6 +49,23 @@ void SetVar(Polynomial *poly, const char var);
 int PrintFmt(const char *format, ...);
 
 /**
+ * @brief Leading coefficient of polynomial
+ * 
+ * @param poly Polynomial
+ * @return double Leading coefficient of poly
+ */
+double LC(const Polynomial poly);
+
+/**
+ * @brief Leading term of polynomial
+ * 
+ * @param poly Polynomial
+ * @param lt Leading term of ply
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int LT(const Polynomial poly, Polynomial *lt);
+
+/**
  * @brief Add two polynomials. poly <- poly1 + poly2
  * 
  * @param poly1 Polynomial to add
