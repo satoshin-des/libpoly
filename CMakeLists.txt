@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 project(libpoly)
 
-# set compiler to clang
+# set compiler to gcc
 if(NOT CMAKE_C_COMPILER)
     set(CMAKE_C_COMPILER gcc)
 endif()
