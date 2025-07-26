@@ -26,4 +26,4 @@ set_target_properties(poly PROPERTIES OUTPUT_NAME "poly")
 add_executable(test_main.exe Main.c)
 
 # Link to library
-target_link_libraries(test_main.exe PRIVATE poly)
+target_link_libraries(test_main.exe PRIVATE poly m)

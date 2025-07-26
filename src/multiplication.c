@@ -13,13 +13,13 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
         return EXIT_FAILURE;
     }
 
-    for(i = 0; i <= poly->deg; ++i)
+    for (i = 0; i <= poly->deg; ++i)
     {
-        for(j = 0; j <= poly1.deg; ++j)
+        for (j = 0; j <= poly1.deg; ++j)
         {
-            for(k = 0; k <= poly2.deg; ++k)
+            for (k = 0; k <= poly2.deg; ++k)
             {
-                if(j + k == i)
+                if (j + k == i)
                 {
                     poly->coeff[i] += poly1.coeff[j] * poly2.coeff[k];
                     break;
@@ -41,7 +41,7 @@ int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly)
         return EXIT_FAILURE;
     }
 
-    for(long i = 0; i <= poly->deg; ++i)
+    for (long i = 0; i <= poly->deg; ++i)
     {
         poly->coeff[i] = scalar * poly1.coeff[i];
     }

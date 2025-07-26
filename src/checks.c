@@ -1,11 +1,13 @@
 #include "polynomial.h"
 
+#include <math.h>
+
 int IsMono(const Polynomial poly)
 {
     long n_nonzero_term = 0;
     for (long i = 0; i <= poly.deg; ++i)
     {
-        if (poly.coeff[i] != 0)
+        if (fabs(poly.coeff[i]) > EPSILON)
         {
             ++n_nonzero_term;
         }
@@ -22,7 +24,7 @@ int IsZero(const Polynomial poly)
 {
     for (long i = 0; i <= poly.deg; ++i)
     {
-        if (poly.coeff[i] != 0)
+        if (fabs(poly.coeff[i]) > EPSILON)
         {
             return 0;
         }

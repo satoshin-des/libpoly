@@ -1,12 +1,14 @@
 #include "polynomial.h"
 
+#include <math.h>
+
 int Deg(const Polynomial poly)
 {
     for (long i = poly.deg; i >= 0; --i)
     {
-        if (poly.coeff[i] != 0)
+        if (fabs(poly.coeff[i]) > EPSILON)
         {
-            if ((i == 0) && (poly.coeff[i] == 0))
+            if ((i == 0) && (fabs(poly.coeff[i]) < EPSILON))
             {
                 return -1;
             }

@@ -53,9 +53,9 @@ int PrintFmt(const char *format, ...)
             {
                 printf("0");
             }
-            else if(IsMono(poly))
+            else if (IsMono(poly))
             {
-                if(poly.coeff[Deg(poly)] > 0)
+                if (poly.coeff[Deg(poly)] > 0)
                 {
                     printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
                 }

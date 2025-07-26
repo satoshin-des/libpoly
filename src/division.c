@@ -123,7 +123,7 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
                 return EXIT_FAILURE;
             }
             res = Copy(t1, rem);
-            if(res == EXIT_FAILURE)
+            if (res == EXIT_FAILURE)
             {
                 perror("Copy failed @DivPoly");
                 return EXIT_FAILURE;

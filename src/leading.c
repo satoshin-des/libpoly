@@ -1,6 +1,7 @@
 #include "polynomial.h"
 
 #include <stdint.h>
+#include <math.h>
 
 double LC(const Polynomial poly)
 {
@@ -21,7 +22,7 @@ int LT(const Polynomial poly, Polynomial *lt)
 
     for (long i = poly.deg; i >= 0; --i)
     {
-        if (poly.coeff[i] != 0)
+        if (fabs(poly.coeff[i]) > EPSILON)
         {
             res = InitPoly(lt, i);
             if (res == EXIT_FAILURE)

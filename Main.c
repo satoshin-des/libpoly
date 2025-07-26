@@ -37,7 +37,7 @@ int main()
 
     // div
     DivPoly(g, f, &h, &n);
-    PrintFmt("f=g*(%p)+%p\n", n, h);
+    PrintFmt("g=f*(%p)+%p\n", n, h);
 
     ClearPoly(&f);
     ClearPoly(&g);
