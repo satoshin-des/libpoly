@@ -9,7 +9,7 @@ int InitPoly(Polynomial *poly, const long deg)
 {
     poly->deg = deg;
     poly->coeff = (double *)malloc((deg + 1) * sizeof(double));
-    if(poly->coeff == NULL)
+    if (poly->coeff == NULL)
     {
         perror("malloc failed @InitPoly");
         return EXIT_FAILURE;
@@ -23,7 +23,7 @@ int InitPoly(Polynomial *poly, const long deg)
 void ClearPoly(Polynomial *poly)
 {
     poly->deg = -1;
-    if(poly->coeff != NULL)
+    if (poly->coeff != NULL)
     {
         free(poly->coeff);
         poly->coeff = NULL;
@@ -49,46 +49,64 @@ int PrintFmt(const char *format, ...)
         if ((*format == '%') && (*(format + 1) == 'p'))
         {
             poly = va_arg(args, Polynomial);
-            for (i = poly.deg; i >= 0; --i)
+            if (IsZero(poly))
             {
-                if (i == poly.deg)
+                printf("0");
+            }
+            else if(IsMono(poly))
+            {
+                if(poly.coeff[Deg(poly)] > 0)
                 {
-                    if (poly.coeff[i] > 0)
-                    {
-                        res = printf("%lf*x^%ld", poly.coeff[i], i);
-                    }
-                    else if (poly.coeff[i] < 0)
-                    {
-                        res = printf("%lf*x^%ld", poly.coeff[i], i);
-                    }
-                }
-                else if (i == 0)
-                {
-                    if (poly.coeff[i] > 0)
-                    {
-                        res = printf("+%lf", poly.coeff[i]);
-                    }
-                    else if (poly.coeff[i] < 0)
-                    {
-                        res = printf("%lf", poly.coeff[i]);
-                    }
+                    printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
                 }
                 else
                 {
-                    if (poly.coeff[i] > 0)
-                    {
-                        res = printf("+%lf*x^%ld", poly.coeff[i], i);
-                    }
-                    else if (poly.coeff[i] < 0)
-                    {
-                        res = printf("%lf*x^%ld", poly.coeff[i], i);
-                    }
+                    printf("-%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
                 }
-
-                if (res < 0)
+            }
+            else
+            {
+                for (i = Deg(poly); i >= 0; --i)
                 {
-                    perror("printf failed @PrintFmt");
-                    return EXIT_FAILURE;
+                    if (i == Deg(poly))
+                    {
+                        if (poly.coeff[i] > 0)
+                        {
+                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                        }
+                        else if (poly.coeff[i] < 0)
+                        {
+                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                        }
+                    }
+                    else if (i == 0)
+                    {
+                        if (poly.coeff[i] > 0)
+                        {
+                            res = printf("+%lf", poly.coeff[i]);
+                        }
+                        else if (poly.coeff[i] < 0)
+                        {
+                            res = printf("%lf", poly.coeff[i]);
+                        }
+                    }
+                    else
+                    {
+                        if (poly.coeff[i] > 0)
+                        {
+                            res = printf("+%lf*x^%ld", poly.coeff[i], i);
+                        }
+                        else if (poly.coeff[i] < 0)
+                        {
+                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                        }
+                    }
+
+                    if (res < 0)
+                    {
+                        perror("printf failed @PrintFmt");
+                        return EXIT_FAILURE;
+                    }
                 }
             }
             format += 2;
