@@ -39,6 +39,10 @@ int main()
     DivPoly(g, f, &h, &n);
     PrintFmt("g=f*(%p)+%p\n", n, h);
 
+    // cos
+    MaclaurinExp(COS_FUNC, 10, &h);
+    PrintFmt("cos = %p\n", h);
+
     ClearPoly(&f);
     ClearPoly(&g);
     ClearPoly(&h);

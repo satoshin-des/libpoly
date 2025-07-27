@@ -4,7 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EPSILON 1e-10
+#define EPSILON 1e-10 // Tolerance used for floating-point comparisons to handle precision errors
+#define SIN_FUNC 0    // sin function
+#define COS_FUNC 1    // cos function
 
 /**
  * @brief Structure of polynomial
@@ -150,9 +152,19 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono);
  * @param poly1 Polynomial to be divided
  * @param poly2 Polynomial to divide
  * @param poly Quotient of poly1 / poly2
- * @return int
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Polynomial *quo);
+
+/**
+ * @brief Compute approximate polynomial that
+ *
+ * @param func_name Name of function (defined as macros).
+ * @param deg Degree of apprximate polynomial.
+ * @param poly Polynomial to be computed.
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int MaclaurinExp(const int func_name, const long deg, Polynomial *poly);
 
 /**
  * @brief Test if poly is monomial or not
