@@ -1,5 +1,8 @@
 #include "polynomial.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
 {
     int res;

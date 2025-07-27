@@ -1,5 +1,6 @@
 #include "polynomial.h"
 
+#include <stdio.h>
 #include <math.h>
 
 int Deg(const Polynomial poly)

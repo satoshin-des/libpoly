@@ -1,5 +1,8 @@
 #include "polynomial.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+
 int Copy(const Polynomial poly1, Polynomial *poly)
 {
     int res;

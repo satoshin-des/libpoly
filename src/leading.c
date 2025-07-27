@@ -1,6 +1,7 @@
 #include "polynomial.h"
 
-#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 double LC(const Polynomial poly)
