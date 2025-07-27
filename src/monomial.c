@@ -9,6 +9,7 @@ int InitMono(Polynomial *poly, const long deg, const double coeff)
     res = InitPoly(poly, deg);
     if (res == EXIT_FAILURE)
     {
+        perror("InitPoly failed @InitMono");
         return EXIT_FAILURE;
     }
 

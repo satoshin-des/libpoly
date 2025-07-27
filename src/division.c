@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <errno.h>
 
 int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
 {
@@ -25,6 +26,7 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
     }
     else if (IsZero(mono2))
     {
+        errno = EPERM;
         perror("divided by zero @MonoDiv");
         return EXIT_FAILURE;
     }
@@ -63,6 +65,7 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
     }
     else if (IsZero(poly2))
     {
+        errno = EPERM;
         perror("divided by zero @DivPoly");
         return EXIT_FAILURE;
     }

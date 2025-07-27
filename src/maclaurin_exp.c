@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
 {
@@ -66,6 +67,7 @@ int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
         break;
 
     default:
+        errno = EINVAL;
         perror("Undefined function was to be maclaurin-expanded");
         return EXIT_FAILURE;
     }
