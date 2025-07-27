@@ -157,7 +157,7 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono);
 int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Polynomial *quo);
 
 /**
- * @brief Compute approximate polynomial that
+ * @brief Compute approximate polynomial of a given function using Maclaurin expansion
  *
  * @param func_name Name of function (defined as macros).
  * @param deg Degree of apprximate polynomial.

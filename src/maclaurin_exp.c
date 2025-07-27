@@ -63,6 +63,7 @@ int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
         break;
 
     default:
+        perror("Undefined function was to be maclaurin-expanded");
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
