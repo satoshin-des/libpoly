@@ -31,3 +31,15 @@ int IsZero(const Polynomial poly)
     }
     return 1;
 }
+
+int IsMonic(const Polynomial poly)
+{
+    if (fabs(poly.coeff[Deg(poly)] - 1) < EPSILON)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}

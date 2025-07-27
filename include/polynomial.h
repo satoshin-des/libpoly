@@ -170,4 +170,12 @@ int IsMono(const Polynomial poly);
  */
 int IsZero(const Polynomial poly);
 
+/**
+ * @brief Test if poly is monic polynomial ot not
+ *
+ * @param poly polynomial to be tested
+ * @return int 1 if poly is monic, 0 if not
+ */
+int IsMonic(const Polynomial poly);
+
 #endif // !POLYNOMIAL_H
