@@ -6,10 +6,10 @@
 int Copy(const Polynomial poly1, Polynomial *poly)
 {
     int res;
-    res = InitPoly(poly, poly1.deg);
+    res = MakePoly(poly, poly1.deg);
     if (res == EXIT_FAILURE)
     {
-        perror("InitPoly failed @Copy");
+        perror("MakePoly failed @Copy");
         return EXIT_FAILURE;
     }
 

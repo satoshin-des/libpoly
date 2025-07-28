@@ -8,9 +8,19 @@
 int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
 {
     int res;
-    if ((!IsMono(mono1)) || (!IsMono(mono2)))
+    if (!IsMono(mono1))
     {
-        res = puts("mono1 or mono2 are not monomial @MonoDiv");
+        res = puts("mono1 is not monomial @MonoDiv");
+        if (res == EOF)
+        {
+            perror("puts failed @MonoDiv");
+            return EXIT_FAILURE;
+        }
+        return EXIT_FAILURE;
+    }
+    else if(!IsMono(mono2))
+    {
+        res = puts("mono2 is not monomial @MonoDiv");
         if (res == EOF)
         {
             perror("puts failed @MonoDiv");
@@ -21,7 +31,7 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
 
     if (IsZero(mono1))
     {
-        res = InitPoly(mono, 0);
+        res = MakePoly(mono, 0);
         mono->coeff[0] = 0;
     }
     else if (IsZero(mono2))
@@ -32,10 +42,10 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
     }
     else
     {
-        res = InitMono(mono, Deg(mono1) - Deg(mono2), (double)mono1.coeff[Deg(mono1)] / mono2.coeff[Deg(mono2)]);
+        res = MakeMono(mono, Deg(mono1) - Deg(mono2), (double)mono1.coeff[Deg(mono1)] / mono2.coeff[Deg(mono2)]);
         if (res == EXIT_FAILURE)
         {
-            perror("InitPoly failed @MonoDiv");
+            perror("MakePoly failed @MonoDiv");
             return EXIT_FAILURE;
         }
     }
@@ -46,8 +56,13 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
 int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Polynomial *quo)
 {
     int res;
-    const long max_deg = fmax(poly1.deg, poly2.deg);
     Polynomial t1, t2, lt1, lt2;
+
+    InitPoly(&t1);
+    InitPoly(&t2);
+    InitPoly(&lt1);
+    InitPoly(&lt2);
+
     if (IsZero(poly1))
     {
         res = Copy(poly1, quo);
@@ -56,10 +71,10 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
             perror("Copy failed @DivPoly");
             return EXIT_FAILURE;
         }
-        res = InitMono(rem, 0, 0);
+        res = MakeMono(rem, 0, 0);
         if (res == EXIT_FAILURE)
         {
-            perror("InitMono failed @DivPoly");
+            perror("MakeMono failed @DivPoly");
             return EXIT_FAILURE;
         }
     }
@@ -77,10 +92,10 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
             perror("Copy failed @DivPoly");
             return EXIT_FAILURE;
         }
-        res = InitMono(quo, 0, 0);
+        res = MakeMono(quo, 0, 0);
         if (res == EXIT_FAILURE)
         {
-            perror("InitMono failed @DivPoly");
+            perror("MakeMono failed @DivPoly");
             return EXIT_FAILURE;
         }
         while ((!IsZero(*rem)) && (Deg(*rem) >= Deg(poly2)))

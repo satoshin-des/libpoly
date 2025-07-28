@@ -5,10 +5,16 @@ int main()
     Polynomial f, g, h;
     Polynomial m, n;
 
-    InitPoly(&f, 3);
-    InitPoly(&g, 5);
-    InitMono(&m, 10, 5);
-    InitMono(&n, 4, 2);
+    InitPoly(&f);
+    InitPoly(&g);
+    InitPoly(&h);
+    InitPoly(&m);
+    InitPoly(&n);
+
+    MakePoly(&f, 3);
+    MakePoly(&g, 5);
+    MakeMono(&m, 10, 5);
+    MakeMono(&n, 4, 2);
     for (long i = 0; i <= f.deg; ++i)
     {
         f.coeff[i] = i + 1;
@@ -25,15 +31,19 @@ int main()
 
     // diff
     SubtrPoly(f, g, &h);
-    PrintFmt("f+g=%p\n", h);
-
-    // prod
-    MulPoly(f, g, &h);
-    PrintFmt("f+g=%p\n", h);
+    PrintFmt("f-g=%p\n", h);
 
     // scalar prod
     MulScalar(10, f, &h);
-    PrintFmt("f+g=%p\n", h);
+    PrintFmt("10f=%p\n", h);
+
+    // prod
+    MulPoly(f, g, &h);
+    PrintFmt("f*g=%p\n", h);
+
+    // gcd
+    //ExtGCD(f, g, &h, &n, &m);
+    //PrintFmt("gcd = %p\n", h);
 
     // div
     DivPoly(g, f, &h, &n);
@@ -43,9 +53,11 @@ int main()
     MaclaurinExp(COS_FUNC, 10, &h);
     PrintFmt("cos = %p\n", h);
 
-    ClearPoly(&f);
-    ClearPoly(&g);
-    ClearPoly(&h);
+    FreePoly(&f);
+    FreePoly(&g);
+    FreePoly(&h);
+    FreePoly(&m);
+    FreePoly(&n);
 
     return 0;
 }

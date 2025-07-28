@@ -8,19 +8,19 @@ int AddPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
     int res;
     if (poly1.deg > poly2.deg)
     {
-        res = InitPoly(poly, poly1.deg);
+        res = MakePoly(poly, poly1.deg);
         if (res == EXIT_FAILURE)
         {
-            perror("InitPoly failed @AddPoly");
+            perror("MakePoly failed @AddPoly");
             return EXIT_FAILURE;
         }
     }
     else
     {
-        res = InitPoly(poly, poly2.deg);
+        res = MakePoly(poly, poly2.deg);
         if (res == EXIT_FAILURE)
         {
-            perror("InitPoly failed @AddPoly");
+            perror("MakePoly failed @AddPoly");
             return EXIT_FAILURE;
         }
     }

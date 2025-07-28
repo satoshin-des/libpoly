@@ -20,21 +20,11 @@ double LC(const Polynomial poly)
 int LT(const Polynomial poly, Polynomial *lt)
 {
     int res;
-
-    for (long i = poly.deg; i >= 0; --i)
+    res = MakeMono(lt, Deg(poly), poly.coeff[Deg(poly)]);
+    if (res == EXIT_FAILURE)
     {
-        if (fabs(poly.coeff[i]) > EPSILON)
-        {
-            res = InitPoly(lt, i);
-            if (res == EXIT_FAILURE)
-            {
-                perror("InitPoly failed @LT");
-                return EXIT_FAILURE;
-            }
-            lt->coeff[i] = poly.coeff[i];
-            return EXIT_SUCCESS;
-        }
+        perror("MakeMono failed @LT");
+        return EXIT_FAILURE;
     }
-
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }

@@ -19,31 +19,33 @@ typedef struct
     char var;
 } Polynomial;
 
+int InitPoly(Polynomial *poly);
+
 /**
- * @brief Initialization of polynomial
+ * @brief Make new polynomial
  *
  * @param poly Polynomial
  * @param deg Degree of polynomial
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-int InitPoly(Polynomial *poly, const long deg);
+int MakePoly(Polynomial *poly, const long deg);
 
 /**
- * @brief Initialization of monomial
+ * @brief Make new monomial
  *
  * @param poly Polynomial
  * @param deg Degree of monomial
  * @param coeff Coefficient of monomial
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-int InitMono(Polynomial *poly, const long deg, const double coeff);
+int MakeMono(Polynomial *poly, const long deg, const double coeff);
 
 /**
  * @brief Clean polynomial
  *
  * @param poly Polynomial
  */
-void ClearPoly(Polynomial *poly);
+void FreePoly(Polynomial *poly);
 
 /**
  * @brief Set variable of polynomial (default variable is x)
@@ -137,6 +139,15 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly);
 int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly);
 
 /**
+ * @brief Negativize polynomial. poly1 <- -poly
+ *
+ * @param poly Polynomial to negativize
+ * @param poly1 Negativized polyomial
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int Minus(const Polynomial poly1, Polynomial *poly);
+
+/**
  * @brief Divide two monomials. mono <- mono1 / mono2
  *
  * @param mono1 Monomial to be  divided
@@ -155,6 +166,18 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono);
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Polynomial *quo);
+
+/**
+ * @brief Compute greatest common divisor(GCD) of two polynomials poly1 and poly2
+ *
+ * @param poly1 Polynomial
+ * @param poly2 Polynomial
+ * @param d GCD of poly1 and poly2
+ * @param a poly1/d
+ * @param b poly2/d
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int ExtGCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d, Polynomial *a, Polynomial *b);
 
 /**
  * @brief Compute approximate polynomial of a given function using Maclaurin expansion

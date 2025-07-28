@@ -7,10 +7,10 @@
 int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
 {
     int res;
-    res = InitPoly(poly, deg);
+    res = MakePoly(poly, deg);
     if (res == EXIT_FAILURE)
     {
-        perror("InitPoly failed @MaclaurinExp");
+        perror("MakePoly failed @MaclaurinExp");
         return EXIT_FAILURE;
     }
 
