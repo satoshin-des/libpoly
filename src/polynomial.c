@@ -8,6 +8,13 @@
 int InitPoly(Polynomial *poly, const long deg)
 {
     poly->deg = deg;
+
+    if (poly != NULL)
+    {
+        free(poly);
+        poly = NULL;
+    }
+
     poly->coeff = (double *)malloc((deg + 1) * sizeof(double));
     if (poly->coeff == NULL)
     {
