@@ -11,18 +11,18 @@ int main()
     InitPoly(&m);
     InitPoly(&n);
 
-    MakePoly(&f, 3);
-    MakePoly(&g, 5);
+    MakePoly(&f, 2);
+    MakePoly(&g, 3);
     MakeMono(&m, 10, 5);
     MakeMono(&n, 4, 2);
-    for (long i = 0; i <= f.deg; ++i)
-    {
-        f.coeff[i] = i + 1;
-    }
-    for (long i = 0; i <= g.deg; ++i)
-    {
-        g.coeff[i] = i + 7;
-    }
+    f.coeff[0] = 1;
+    f.coeff[1] = 2;
+    f.coeff[2] = 1;
+    g.coeff[0] = 1;
+    g.coeff[1] = 3;
+    g.coeff[2] = 3;
+    g.coeff[3] = 1;
+
     // sum
     AddPoly(f, g, &h);
     PrintFmt("f=%p\n", f);

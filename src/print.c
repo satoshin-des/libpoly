@@ -1,8 +1,10 @@
 #include "polynomial.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <math.h>
 
 int PrintFmt(const char *format, ...)
 {
@@ -23,13 +25,13 @@ int PrintFmt(const char *format, ...)
             }
             else if (IsMono(poly))
             {
-                if (poly.coeff[Deg(poly)] > 0)
+                if (fabs(poly.coeff[Deg(poly)] - round(poly.coeff[Deg(poly)])) < EPSILON)
                 {
-                    printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
+                    printf("%ld*x^%d", (long)poly.coeff[Deg(poly)], Deg(poly));
                 }
                 else
                 {
-                    printf("-%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
+                    printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
                 }
             }
             else
@@ -40,33 +42,75 @@ int PrintFmt(const char *format, ...)
                     {
                         if (poly.coeff[i] > 0)
                         {
-                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
+                            }
+                            else
+                            {
+                                res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            }
                         }
                         else if (poly.coeff[i] < 0)
                         {
-                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
+                            }
+                            else
+                            {
+                                res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            }
                         }
                     }
                     else if (i == 0)
                     {
                         if (poly.coeff[i] > 0)
                         {
-                            res = printf("+%lf", poly.coeff[i]);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("+%ld", (long)poly.coeff[i]);
+                            }
+                            else
+                            {
+                                res = printf("+%lf", poly.coeff[i]);
+                            }
                         }
                         else if (poly.coeff[i] < 0)
                         {
-                            res = printf("%lf", poly.coeff[i]);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("%ld", (long)poly.coeff[i]);
+                            }
+                            else
+                            {
+                                res = printf("%lf", poly.coeff[i]);
+                            }
                         }
                     }
                     else
                     {
                         if (poly.coeff[i] > 0)
                         {
-                            res = printf("+%lf*x^%ld", poly.coeff[i], i);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("+%ld*x^%ld", (long)poly.coeff[i], i);
+                            }
+                            else
+                            {
+                                res = printf("+%lf*x^%ld", poly.coeff[i], i);
+                            }
                         }
                         else if (poly.coeff[i] < 0)
                         {
-                            res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
+                            {
+                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
+                            }
+                            else
+                            {
+                                res = printf("%lf*x^%ld", poly.coeff[i], i);
+                            }
                         }
                     }
 
