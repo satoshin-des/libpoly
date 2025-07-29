@@ -10,6 +10,7 @@ int PrintFmt(const char *format, ...)
 {
     int res = 0;
     long i;
+    long n;
     Polynomial poly;
     va_list args;
     va_start(args, format);
@@ -121,6 +122,12 @@ int PrintFmt(const char *format, ...)
                     }
                 }
             }
+            format += 2;
+        }
+        else if((*format == '%') && (*(format + 1) == 'd'))
+        {
+            n = (long)va_arg(args, int);
+            printf("%ld", (long)n);
             format += 2;
         }
         else
