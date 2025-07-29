@@ -33,18 +33,11 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
     }
     else
     {
-        for (i = 0; i <= poly->deg; ++i)
+        for (long i = 0; i <= poly1.deg; ++i)
         {
-            for (j = 0; j <= poly1.deg; ++j)
+            for (long j = 0; j <= poly2.deg; ++j)
             {
-                for (k = 0; k <= poly2.deg; ++k)
-                {
-                    if (j + k == i)
-                    {
-                        poly->coeff[i] += poly1.coeff[j] * poly2.coeff[k];
-                        break;
-                    }
-                }
+                poly->coeff[i + j] += poly1.coeff[i] * poly2.coeff[j];
             }
         }
     }

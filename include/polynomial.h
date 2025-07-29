@@ -177,7 +177,7 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
  * @param b poly2/d
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-int ExtGCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d, Polynomial *a, Polynomial *b);
+// int ExtGCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d, Polynomial *a, Polynomial *b);
 
 /**
  * @brief Compute approximate polynomial of a given function using Maclaurin expansion
