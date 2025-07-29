@@ -18,7 +18,7 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
         }
         return EXIT_FAILURE;
     }
-    else if(!IsMono(mono2))
+    else if (!IsMono(mono2))
     {
         res = puts("mono2 is not monomial @MonoDiv");
         if (res == EOF)
@@ -32,6 +32,11 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
     if (IsZero(mono1))
     {
         res = MakePoly(mono, 0);
+        if(res == EXIT_FAILURE)
+        {
+            perror("MakePoly failed @MonoDiv");
+            return EXIT_FAILURE;
+        }
         mono->coeff[0] = 0;
     }
     else if (IsZero(mono2))
@@ -55,6 +60,10 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
 
 int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Polynomial *quo)
 {
+    FreePoly(rem);
+    FreePoly(quo);
+    InitPoly(rem);
+    InitPoly(quo);
     int res;
     Polynomial t1, t2, lt1, lt2;
 
@@ -68,18 +77,30 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
         res = Copy(poly1, quo);
         if (res == EXIT_FAILURE)
         {
+            FreePoly(&t1);
+            FreePoly(&t2);
+            FreePoly(&lt1);
+            FreePoly(&lt2);
             perror("Copy failed @DivPoly");
             return EXIT_FAILURE;
         }
         res = MakeMono(rem, 0, 0);
         if (res == EXIT_FAILURE)
         {
+            FreePoly(&t1);
+            FreePoly(&t2);
+            FreePoly(&lt1);
+            FreePoly(&lt2);
             perror("MakeMono failed @DivPoly");
             return EXIT_FAILURE;
         }
     }
     else if (IsZero(poly2))
     {
+        FreePoly(&t1);
+        FreePoly(&t2);
+        FreePoly(&lt1);
+        FreePoly(&lt2);
         errno = EPERM;
         perror("divided by zero @DivPoly");
         return EXIT_FAILURE;
@@ -89,12 +110,20 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
         res = Copy(poly1, rem);
         if (res == EXIT_FAILURE)
         {
+            FreePoly(&t1);
+            FreePoly(&t2);
+            FreePoly(&lt1);
+            FreePoly(&lt2);
             perror("Copy failed @DivPoly");
             return EXIT_FAILURE;
         }
         res = MakeMono(quo, 0, 0);
         if (res == EXIT_FAILURE)
         {
+            FreePoly(&t1);
+            FreePoly(&t2);
+            FreePoly(&lt1);
+            FreePoly(&lt2);
             perror("MakeMono failed @DivPoly");
             return EXIT_FAILURE;
         }
@@ -103,52 +132,91 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
             res = LT(*rem, &lt1);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("LT failed @DivPoly");
                 return EXIT_FAILURE;
             }
             res = LT(poly2, &lt2);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("LT failed @DivPoly");
                 return EXIT_FAILURE;
             }
             res = MonoDiv(lt1, lt2, &t1);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("MonoDiv failed @DivPoly");
                 return EXIT_FAILURE;
             }
             res = AddPoly(*quo, t1, &t2);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("AddPoly failed @DivPoly");
                 return EXIT_FAILURE;
             }
+            NormalizeDeg(&t2);
             res = Copy(t2, quo);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("Copy failed @DivPoly");
                 return EXIT_FAILURE;
             }
             res = MulPoly(t1, poly2, &t2);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("MulPoly failed @DivPoly");
                 return EXIT_FAILURE;
             }
             res = SubtrPoly(*rem, t2, &t1);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("SubtrPoly failed @DivPoly");
                 return EXIT_FAILURE;
             }
+            NormalizeDeg(&t1);
             res = Copy(t1, rem);
             if (res == EXIT_FAILURE)
             {
+                FreePoly(&t1);
+                FreePoly(&t2);
+                FreePoly(&lt1);
+                FreePoly(&lt2);
                 perror("Copy failed @DivPoly");
                 return EXIT_FAILURE;
             }
         }
     }
+
+    FreePoly(&t1);
+    FreePoly(&t2);
+    FreePoly(&lt1);
+    FreePoly(&lt2);
     return EXIT_SUCCESS;
 }

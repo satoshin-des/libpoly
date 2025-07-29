@@ -5,17 +5,24 @@
 
 int Deg(const Polynomial poly)
 {
-    for (long i = poly.deg; i >= 0; --i)
+    if (poly.deg == 0)
     {
-        if (fabs(poly.coeff[i]) > EPSILON)
+        return 0;
+    }
+    else
+    {
+        for (long i = poly.deg; i >= 0; --i)
         {
-            if ((i == 0) && (fabs(poly.coeff[i]) < EPSILON))
+            if (fabs(poly.coeff[i]) > EPSILON)
             {
-                return -1;
-            }
-            else
-            {
-                return i;
+                if ((i == 0) && (fabs(poly.coeff[i]) < EPSILON))
+                {
+                    return -1;
+                }
+                else
+                {
+                    return i;
+                }
             }
         }
     }

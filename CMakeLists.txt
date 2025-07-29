@@ -10,7 +10,7 @@ set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # add compile options
-add_compile_options(-O2)
+# add_compile_options(-O0)
 
 # include directory
 include_directories(include)

@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define EPSILON 1e-10 // Tolerance used for floating-point comparisons to handle precision errors
-#define SIN_FUNC 0    // sin function
-#define COS_FUNC 1    // cos function
+#define ERR_STR_LEN 200 // length of strings that prints when errors occured
+#define EPSILON 1e-10   // Tolerance used for floating-point comparisons to handle precision errors
+#define SIN_FUNC 0      // sin function
+#define COS_FUNC 1      // cos function
 
 /**
  * @brief Structure of polynomial
@@ -18,6 +19,8 @@ typedef struct
     double *coeff;
     char var;
 } Polynomial;
+
+extern char err_str[ERR_STR_LEN];
 
 int InitPoly(Polynomial *poly);
 
@@ -71,6 +74,20 @@ int PrintFmt(const char *format, ...);
  * @return int Degree of poly. -1 if poly is 0
  */
 int Deg(const Polynomial poly);
+
+/**
+ * @brief Normalize degree of polynomial, i.e., ignore haed zero terms
+ *
+ * @param poly Polynomial to normalize
+ */
+void NormalizeDeg(Polynomial *poly);
+
+/**
+ * @brief Normalize coefficients of polynomial, i.e., make polynomial monic
+ *
+ * @param poly Polynomial to normalize
+ */
+void NormalizeCoeff(Polynomial *poly);
 
 /**
  * @brief Copy polynomial
@@ -177,7 +194,7 @@ int DivPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *rem, Pol
  * @param b poly2/d
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-// int ExtGCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d, Polynomial *a, Polynomial *b);
+int GCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d);
 
 /**
  * @brief Compute approximate polynomial of a given function using Maclaurin expansion

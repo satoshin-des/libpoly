@@ -41,6 +41,9 @@ int main()
     MulPoly(f, g, &h);
     PrintFmt("f*g=%p\n", h);
 
+    GCD(f, g, &h);
+    PrintFmt("GCD(f, g) = %p\n", h);
+
     // div
     DivPoly(g, f, &h, &n);
     PrintFmt("g=f*(%p)+%p\n", n, h);
