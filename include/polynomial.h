@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "math_func_ids.h"
+
 #define ERR_STR_LEN 200 // length of strings that prints when errors occured
 #define EPSILON 1e-10   // Tolerance used for floating-point comparisons to handle precision errors
-#define SIN_FUNC 0      // sin function
-#define COS_FUNC 1      // cos function
 
 /**
  * @brief Structure of polynomial

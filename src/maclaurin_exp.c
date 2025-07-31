@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include "math_func_ids.h"
+
 int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
 {
     int res;

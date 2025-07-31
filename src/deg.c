@@ -5,7 +5,11 @@
 
 int Deg(const Polynomial poly)
 {
-    if (poly.deg == 0)
+    if (poly.coeff == NULL)
+    {
+        return -1;
+    }
+    else if (poly.deg == 0)
     {
         return 0;
     }
@@ -15,15 +19,11 @@ int Deg(const Polynomial poly)
         {
             if (fabs(poly.coeff[i]) > EPSILON)
             {
-                if ((i == 0) && (fabs(poly.coeff[i]) < EPSILON))
-                {
-                    return -1;
-                }
-                else
-                {
-                    return i;
-                }
+                return i;
             }
         }
     }
+
+    // If all coefficients are zero, then returns 0
+    return 0;
 }
