@@ -52,6 +52,8 @@ int main()
     MaclaurinExp(COS_FUNC, 10, &h);
     PrintFmt("cos = %p\n", h);
 
+    PrintFmt("cos(pi) = %lf\n", Substitute(h, 3.1415926535897932384626433832));
+
     FreePoly(&f);
     FreePoly(&g);
     FreePoly(&h);

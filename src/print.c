@@ -10,7 +10,11 @@ int PrintFmt(const char *format, ...)
 {
     int res = 0;
     long i;
-    long n;
+    int n_int;
+    long n_long;
+    long long n_long_long;
+    float a_float;
+    double a_double;
     Polynomial poly;
     va_list args;
     va_start(args, format);
@@ -124,11 +128,35 @@ int PrintFmt(const char *format, ...)
             }
             format += 2;
         }
-        else if((*format == '%') && (*(format + 1) == 'd'))
+        else if ((*format == '%') && (*(format + 1) == 'd'))
         {
-            n = (long)va_arg(args, int);
-            printf("%ld", (long)n);
+            n_int = va_arg(args, int);
+            printf("%d", n_int);
             format += 2;
+        }
+        else if ((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'd'))
+        {
+            n_long = va_arg(args, long);
+            printf("%ld", n_long);
+            format += 3;
+        }
+        else if ((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'l') && (*(format + 3) == 'd'))
+        {
+            n_long_long = va_arg(args, long long);
+            printf("%lld", n_long_long);
+            format += 4;
+        }
+        else if((*format == '%') && (*(format + 1) == 'f'))
+        {
+            a_float = va_arg(args, double);
+            printf("%f", a_float);
+            format += 2;
+        }
+        else if((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'f'))
+        {
+            a_double = va_arg(args, double);
+            printf("%lf", a_double);
+            format += 3;
         }
         else
         {

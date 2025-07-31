@@ -120,6 +120,15 @@ double LC(const Polynomial poly);
 int LT(const Polynomial poly, Polynomial *lt);
 
 /**
+ * @brief Substitute value to polynomial
+ *
+ * @param polynomial Polynomail to be substituted
+ * @param a Value to substitute
+ * @return double poly(a)
+ */
+double Substitute(const Polynomial poly, const double a);
+
+/**
  * @brief Add two polynomials. poly <- poly1 + poly2
  *
  * @param poly1 Polynomial to add
