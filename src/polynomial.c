@@ -5,7 +5,9 @@
 int InitPoly(Polynomial *poly)
 {
     if (poly == NULL)
+    {
         return EXIT_FAILURE;
+    }
 
     poly->deg = -1;
     poly->coeff = NULL;

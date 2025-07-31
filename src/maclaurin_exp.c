@@ -68,6 +68,21 @@ int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
         }
         break;
 
+    case EXP_FUNC:
+        t = 1.0;
+        for (long i = 0; i <= deg; ++i)
+        {
+            if (i <= 1)
+            {
+                t = 1.0;
+            }
+            else
+            {
+                t *= 1.0 / i;
+            }
+            poly->coeff[i] = t;
+        }
+
     default:
         errno = EINVAL;
         perror("Undefined function was to be maclaurin-expanded");
