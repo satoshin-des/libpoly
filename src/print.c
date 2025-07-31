@@ -26,17 +26,17 @@ int PrintFmt(const char *format, ...)
             poly = va_arg(args, Polynomial);
             if (IsZero(poly))
             {
-                printf("0");
+                res = printf("0");
             }
             else if (IsMono(poly))
             {
                 if (fabs(poly.coeff[Deg(poly)] - round(poly.coeff[Deg(poly)])) < EPSILON)
                 {
-                    printf("%ld*x^%d", (long)poly.coeff[Deg(poly)], Deg(poly));
+                    res = printf("%ld*x^%d", (long)poly.coeff[Deg(poly)], Deg(poly));
                 }
                 else
                 {
-                    printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
+                    res = printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
                 }
             }
             else
@@ -131,31 +131,56 @@ int PrintFmt(const char *format, ...)
         else if ((*format == '%') && (*(format + 1) == 'd'))
         {
             n_int = va_arg(args, int);
-            printf("%d", n_int);
+            res = printf("%d", n_int);
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
             format += 2;
         }
         else if ((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'd'))
         {
             n_long = va_arg(args, long);
-            printf("%ld", n_long);
+            res = printf("%ld", n_long);
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
             format += 3;
         }
         else if ((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'l') && (*(format + 3) == 'd'))
         {
             n_long_long = va_arg(args, long long);
-            printf("%lld", n_long_long);
+            res = printf("%lld", n_long_long);
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
             format += 4;
         }
-        else if((*format == '%') && (*(format + 1) == 'f'))
+        else if ((*format == '%') && (*(format + 1) == 'f'))
         {
             a_float = va_arg(args, double);
-            printf("%f", a_float);
+            res = printf("%f", a_float);
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
             format += 2;
         }
-        else if((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'f'))
+        else if ((*format == '%') && (*(format + 1) == 'l') && (*(format + 2) == 'f'))
         {
             a_double = va_arg(args, double);
-            printf("%lf", a_double);
+            res = printf("%lf", a_double);
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
             format += 3;
         }
         else
