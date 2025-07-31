@@ -20,6 +20,12 @@ typedef struct
     char var;
 } Polynomial;
 
+/**
+ * @brief Initialize polynomial
+ *
+ * @param poly Polynomial to initialize
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
 int InitPoly(Polynomial *poly);
 
 /**
