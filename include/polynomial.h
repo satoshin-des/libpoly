@@ -20,8 +20,6 @@ typedef struct
     char var;
 } Polynomial;
 
-extern char err_str[ERR_STR_LEN];
-
 int InitPoly(Polynomial *poly);
 
 /**
