@@ -19,7 +19,9 @@ int InitPoly(Polynomial *poly)
 void FreePoly(Polynomial *poly)
 {
     if (poly == NULL)
+    {
         return;
+    }
 
     poly->deg = -1;
     if (poly->coeff != NULL)

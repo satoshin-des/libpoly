@@ -6,6 +6,562 @@
 #include <string.h>
 #include <math.h>
 
+int PrintPoly(const Polynomial poly)
+{
+    int res;
+    if (IsZero(poly))
+    {
+        res = printf("0");
+    }
+    else if (IsMono(poly))
+    {
+        // Case of real number
+        if (fabs(cimag(poly.coeff[Deg(poly)])) < EPSILON)
+        {
+            // Case of that real part is integer
+            if (fabs(creal(poly.coeff[Deg(poly)]) - round(creal(poly.coeff[Deg(poly)]))) < EPSILON)
+            {
+                res = printf("%ld*x^%d", (long)creal(poly.coeff[Deg(poly)]), Deg(poly));
+            }
+            // Case of that real part is not integer
+            else
+            {
+                res = printf("%lf*x^%d", creal(poly.coeff[Deg(poly)]), Deg(poly));
+            }
+        }
+        // Case of pure imaginary number
+        else if (fabs(creal(poly.coeff[Deg(poly)])) < EPSILON)
+        {
+            // Case of that imaginary part is integer
+            if (fabs(cimag(poly.coeff[Deg(poly)]) - round(cimag(poly.coeff[Deg(poly)]))) < EPSILON)
+            {
+                res = printf("%ldi*x^%d", (long)cimag(poly.coeff[Deg(poly)]), Deg(poly));
+            }
+            // Case of that imaginary part is not integer
+            else
+            {
+                res = printf("%lfi*x^%d", cimag(poly.coeff[Deg(poly)]), Deg(poly));
+            }
+        }
+        else
+        {
+            // Case of that real part is integer
+            if (fabs(creal(poly.coeff[Deg(poly)]) - round(creal(poly.coeff[Deg(poly)]))) < EPSILON)
+            {
+                // Case of that imaginary part is integer
+                if (fabs(cimag(poly.coeff[Deg(poly)]) - round(cimag(poly.coeff[Deg(poly)]))) < EPSILON)
+                {
+                    if (cimag(poly.coeff[Deg(poly)]) < 0)
+                    {
+                        res = printf("(%ld%ldi)*x^%d", (long)creal(poly.coeff[Deg(poly)]), (long)cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                    else
+                    {
+                        res = printf("(%ld+%ldi)*x^%d", (long)creal(poly.coeff[Deg(poly)]), (long)cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                }
+                // Case of that imaginary part is not integer
+                else
+                {
+                    if (cimag(poly.coeff[Deg(poly)]) < 0)
+                    {
+                        res = printf("(%ld%lfi)*x^%d", (long)creal(poly.coeff[Deg(poly)]), cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                    else
+                    {
+                        res = printf("(%ld+%lfi)*x^%d", (long)creal(poly.coeff[Deg(poly)]), cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                }
+            }
+            // Case of that real part is not integer
+            else
+            {
+                // Case of that imaginary part is integer
+                if (fabs(cimag(poly.coeff[Deg(poly)]) - round(cimag(poly.coeff[Deg(poly)]))) < EPSILON)
+                {
+                    if (cimag(poly.coeff[Deg(poly)]) < 0)
+                    {
+                        res = printf("(%lf%ldi)*x^%d", creal(poly.coeff[Deg(poly)]), (long)cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                    else
+                    {
+                        res = printf("(%lf+%ldi)*x^%d", creal(poly.coeff[Deg(poly)]), (long)cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                }
+                // Case of that imaginary part is not integer
+                else
+                {
+                    if (cimag(poly.coeff[Deg(poly)]) < 0)
+                    {
+                        res = printf("(%lf%lfi)*x^%d", creal(poly.coeff[Deg(poly)]), cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                    else
+                    {
+                        res = printf("(%lf+%lfi)*x^%d", creal(poly.coeff[Deg(poly)]), cimag(poly.coeff[Deg(poly)]), Deg(poly));
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        for (long i = Deg(poly); i >= 0; --i)
+        {
+            if (i == Deg(poly))
+            {
+                // Case of real number
+                if (fabs(cimag(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        res = printf("%ld*x^%ld", (long)creal(poly.coeff[i]), i);
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        res = printf("%lf*x^%ld", creal(poly.coeff[i]), i);
+                    }
+                }
+                // Case of pure imaginary number
+                else if (fabs(creal(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that imaginary part is integer
+                    if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                    {
+                        res = printf("%ldi*x^%ld", (long)cimag(poly.coeff[i]), i);
+                    }
+                    // Case of that imaginary part is not integer
+                    else
+                    {
+                        res = printf("%lfi*x^%ld", cimag(poly.coeff[i]), i);
+                    }
+                }
+                else
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("(%ld%ldi)*x^%ld", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("(%ld+%ldi)*x^%ld", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("(%ld%lfi)*x^%ld", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("(%ld+%lfi)*x^%ld", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("(%lf%ldi)*x^%ld", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("(%lf+%ldi)*x^%ld", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("(%lf%lfi)*x^%ld", creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("(%lf+%lfi)*x^%ld", creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (i == 0)
+            {
+                // Case of real number
+                if (fabs(cimag(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ld", (long)creal(poly.coeff[i]));
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld", (long)creal(poly.coeff[i]));
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lf", creal(poly.coeff[i]));
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld", (long)creal(poly.coeff[i]));
+                        }
+                    }
+                }
+                // Case of pure imaginary number
+                else if (fabs(creal(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that imaginary part is integer
+                    if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ldi", (long)cimag(poly.coeff[i]));
+                        }
+                        else
+                        {
+                            res = printf("%ldi", (long)cimag(poly.coeff[i]));
+                        }
+                    }
+                    // Case of that imaginary part is not integer
+                    else
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lfi", cimag(poly.coeff[i]));
+                        }
+                        else
+                        {
+                            res = printf("%lfi", cimag(poly.coeff[i]));
+                        }
+                    }
+                }
+                else
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%ldi)", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%ldi)", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%lfi)", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%lfi)", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%ldi)", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%ldi)", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%lfi)", creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%lfi)", creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                        }
+                    }
+                }
+            }
+            else if (i == 1)
+            {
+                // Case of real number
+                if (fabs(cimag(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ld*x", (long)creal(poly.coeff[i]));
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld*x", (long)creal(poly.coeff[i]));
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lf*x", creal(poly.coeff[i]));
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld*x", (long)creal(poly.coeff[i]));
+                        }
+                    }
+                }
+                // Case of pure imaginary number
+                else if (fabs(creal(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that imaginary part is integer
+                    if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ldi*x", (long)cimag(poly.coeff[i]));
+                        }
+                        else
+                        {
+                            res = printf("%ldi*x", (long)cimag(poly.coeff[i]));
+                        }
+                    }
+                    // Case of that imaginary part is not integer
+                    else
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lfi*x", cimag(poly.coeff[i]));
+                        }
+                        else
+                        {
+                            res = printf("%lfi*x", cimag(poly.coeff[i]));
+                        }
+                    }
+                }
+                else
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%ldi)*x", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%ldi)*x", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%lfi)*x", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%lfi)*x", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%ldi)*x", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%ldi)*x", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]));
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%lfi)*x", creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%lfi)*x", creal(poly.coeff[i]), cimag(poly.coeff[i]));
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Case of real number
+                if (fabs(cimag(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ld*x^%ld", (long)creal(poly.coeff[i]), i);
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld*x^%ld", (long)creal(poly.coeff[i]), i);
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        if (creal(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lf*x^%ld", creal(poly.coeff[i]), i);
+                        }
+                        else if (creal(poly.coeff[i]) < 0)
+                        {
+                            res = printf("%ld*x^%ld", (long)creal(poly.coeff[i]), i);
+                        }
+                    }
+                }
+                // Case of pure imaginary number
+                else if (fabs(creal(poly.coeff[i])) < EPSILON)
+                {
+                    // Case of that imaginary part is integer
+                    if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%ldi*x^%ld", (long)cimag(poly.coeff[i]), i);
+                        }
+                        else
+                        {
+                            res = printf("%ldi*x^%ld", (long)cimag(poly.coeff[i]), i);
+                        }
+                    }
+                    // Case of that imaginary part is not integer
+                    else
+                    {
+                        if (cimag(poly.coeff[i]) > 0)
+                        {
+                            res = printf("+%lfi*x^%ld", cimag(poly.coeff[i]), i);
+                        }
+                        else
+                        {
+                            res = printf("%lfi*x^%ld", cimag(poly.coeff[i]), i);
+                        }
+                    }
+                }
+                else
+                {
+                    // Case of that real part is integer
+                    if (fabs(creal(poly.coeff[i]) - round(creal(poly.coeff[i]))) < EPSILON)
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%ldi)*x^%ld", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%ldi)*x^%ld", (long)creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%ld%lfi)*x^%ld", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("+(%ld+%lfi)*x^%ld", (long)creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                        }
+                    }
+                    // Case of that real part is not integer
+                    else
+                    {
+                        // Case of that imaginary part is integer
+                        if (fabs(cimag(poly.coeff[i]) - round(cimag(poly.coeff[i]))) < EPSILON)
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%ldi)*x^%ld", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%ldi)*x^%ld", creal(poly.coeff[i]), (long)cimag(poly.coeff[i]), i);
+                            }
+                        }
+                        // Case of that imaginary part is not integer
+                        else
+                        {
+                            if (cimag(poly.coeff[i]) < 0)
+                            {
+                                res = printf("+(%lf%lfi)*x^%ld", creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                            else
+                            {
+                                res = printf("+(%lf+%lfi)*x^%ld", creal(poly.coeff[i]), cimag(poly.coeff[i]), i);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (res < 0)
+            {
+                perror("printf failed @PrintFmt");
+                return EXIT_FAILURE;
+            }
+        }
+    }
+    return EXIT_SUCCESS;
+}
+
 int PrintFmt(const char *format, ...)
 {
     int res = 0;
@@ -24,107 +580,11 @@ int PrintFmt(const char *format, ...)
         if ((*format == '%') && (*(format + 1) == 'p'))
         {
             poly = va_arg(args, Polynomial);
-            if (IsZero(poly))
+            res = PrintPoly(poly);
+            if (res == EXIT_FAILURE)
             {
-                res = printf("0");
-            }
-            else if (IsMono(poly))
-            {
-                if (fabs(poly.coeff[Deg(poly)] - round(poly.coeff[Deg(poly)])) < EPSILON)
-                {
-                    res = printf("%ld*x^%d", (long)poly.coeff[Deg(poly)], Deg(poly));
-                }
-                else
-                {
-                    res = printf("%lf*x^%d", poly.coeff[Deg(poly)], Deg(poly));
-                }
-            }
-            else
-            {
-                for (i = Deg(poly); i >= 0; --i)
-                {
-                    if (i == Deg(poly))
-                    {
-                        if (poly.coeff[i] > 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
-                            }
-                            else
-                            {
-                                res = printf("%lf*x^%ld", poly.coeff[i], i);
-                            }
-                        }
-                        else if (poly.coeff[i] < 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
-                            }
-                            else
-                            {
-                                res = printf("%lf*x^%ld", poly.coeff[i], i);
-                            }
-                        }
-                    }
-                    else if (i == 0)
-                    {
-                        if (poly.coeff[i] > 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("+%ld", (long)poly.coeff[i]);
-                            }
-                            else
-                            {
-                                res = printf("+%lf", poly.coeff[i]);
-                            }
-                        }
-                        else if (poly.coeff[i] < 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("%ld", (long)poly.coeff[i]);
-                            }
-                            else
-                            {
-                                res = printf("%lf", poly.coeff[i]);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (poly.coeff[i] > 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("+%ld*x^%ld", (long)poly.coeff[i], i);
-                            }
-                            else
-                            {
-                                res = printf("+%lf*x^%ld", poly.coeff[i], i);
-                            }
-                        }
-                        else if (poly.coeff[i] < 0)
-                        {
-                            if (fabs(poly.coeff[i] - round(poly.coeff[i])) < EPSILON)
-                            {
-                                res = printf("%ld*x^%ld", (long)poly.coeff[i], i);
-                            }
-                            else
-                            {
-                                res = printf("%lf*x^%ld", poly.coeff[i], i);
-                            }
-                        }
-                    }
-
-                    if (res < 0)
-                    {
-                        perror("printf failed @PrintFmt");
-                        return EXIT_FAILURE;
-                    }
-                }
+                perror("PrintPoly failed @PrintFmt");
+                return EXIT_FAILURE;
             }
             format += 2;
         }

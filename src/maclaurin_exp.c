@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <complex.h>
 
 #include "math_func_ids.h"
 
@@ -16,7 +17,7 @@ int MaclaurinExp(const int func_name, const long deg, Polynomial *poly)
         return EXIT_FAILURE;
     }
 
-    double t;
+    double complex t;
 
     switch (func_name)
     {

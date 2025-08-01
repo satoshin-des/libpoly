@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <complex.h>
 
 int Deg(const Polynomial poly)
 {
@@ -17,7 +18,7 @@ int Deg(const Polynomial poly)
     {
         for (long i = poly.deg; i >= 0; --i)
         {
-            if (fabs(poly.coeff[i]) > EPSILON)
+            if (cabs(poly.coeff[i]) > EPSILON)
             {
                 return i;
             }

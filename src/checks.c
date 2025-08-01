@@ -2,13 +2,14 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <complex.h>
 
 int IsMono(const Polynomial poly)
 {
     long n_nonzero_term = 0;
     for (long i = 0; i <= poly.deg; ++i)
     {
-        if (fabs(poly.coeff[i]) > EPSILON)
+        if (cabs(poly.coeff[i]) > EPSILON)
         {
             ++n_nonzero_term;
         }
@@ -25,7 +26,7 @@ int IsZero(const Polynomial poly)
 {
     for (long i = 0; i <= poly.deg; ++i)
     {
-        if (fabs(poly.coeff[i]) > EPSILON)
+        if (cabs(poly.coeff[i]) > EPSILON)
         {
             return 0;
         }
@@ -35,7 +36,7 @@ int IsZero(const Polynomial poly)
 
 int IsMonic(const Polynomial poly)
 {
-    if (fabs(poly.coeff[Deg(poly)] - 1) < EPSILON)
+    if (cabs(poly.coeff[Deg(poly)] - 1) < EPSILON)
     {
         return 1;
     }

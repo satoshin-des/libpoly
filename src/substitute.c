@@ -2,10 +2,11 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <complex.h>
 
-double Substitute(const Polynomial poly, const double a)
+double complex Substitute(const Polynomial poly, const double complex a)
 {
-    double ans = 0.0;
+    double complex ans = 0.0;
     for (long i = 0; i <= poly.deg; ++i)
     {
         if (fabs(poly.coeff[i]) > EPSILON)

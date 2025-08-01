@@ -1,5 +1,7 @@
 #include "polynomial.h"
 
+#include <complex.h>
+
 int main()
 {
     Polynomial f, g, h;
@@ -16,12 +18,12 @@ int main()
     MakeMono(&m, 10, 5);
     MakeMono(&n, 4, 2);
     f.coeff[0] = 1;
-    f.coeff[1] = 2;
-    f.coeff[2] = 1;
+    f.coeff[1] = 2 * I;
+    f.coeff[2] = -1;
     g.coeff[0] = 1;
-    g.coeff[1] = 3;
-    g.coeff[2] = 3;
-    g.coeff[3] = 1;
+    g.coeff[1] = 3 * I;
+    g.coeff[2] = -3;
+    g.coeff[3] = -I;
 
     // sum
     AddPoly(f, g, &h);
@@ -53,6 +55,9 @@ int main()
     PrintFmt("cos = %p\n", h);
 
     PrintFmt("cos(pi) = %lf\n", Substitute(h, 3.1415926535897932384626433832));
+
+    FFT(2, I, g, &h);
+    PrintFmt("FFT(g) = %p\n", h);
 
     FreePoly(&f);
     FreePoly(&g);

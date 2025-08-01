@@ -47,7 +47,7 @@ int MonoDiv(const Polynomial mono1, const Polynomial mono2, Polynomial *mono)
     }
     else
     {
-        res = MakeMono(mono, Deg(mono1) - Deg(mono2), (double)mono1.coeff[Deg(mono1)] / mono2.coeff[Deg(mono2)]);
+        res = MakeMono(mono, Deg(mono1) - Deg(mono2), (double complex)mono1.coeff[Deg(mono1)] / mono2.coeff[Deg(mono2)]);
         if (res == EXIT_FAILURE)
         {
             perror("MakePoly failed @MonoDiv");

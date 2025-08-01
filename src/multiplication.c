@@ -45,7 +45,7 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly)
     return EXIT_SUCCESS;
 }
 
-int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly)
+int MulScalar(const double complex scalar, const Polynomial poly1, Polynomial *poly)
 {
     int res;
     res = MakePoly(poly, poly1.deg);

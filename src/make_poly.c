@@ -18,7 +18,7 @@ int MakePoly(Polynomial *poly, const long deg)
         free(poly->coeff);
         poly->coeff = NULL;
     }
-    poly->coeff = (double *)malloc((deg + 1) * sizeof(double));
+    poly->coeff = (double complex *)malloc((deg + 1) * sizeof(double complex));
     if (poly->coeff == NULL)
     {
         perror("malloc failed @MakePoly");

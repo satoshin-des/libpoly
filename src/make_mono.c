@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int MakeMono(Polynomial *poly, const long deg, const double coeff)
+int MakeMono(Polynomial *poly, const long deg, const double complex coeff)
 {
     int res;
     res = MakePoly(poly, deg);

@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <complex.h>
 
 #include "math_func_ids.h"
 
@@ -16,7 +18,7 @@
 typedef struct
 {
     long deg;
-    double *coeff;
+    double complex *coeff;
     char var;
 } Polynomial;
 
@@ -45,7 +47,7 @@ int MakePoly(Polynomial *poly, const long deg);
  * @param coeff Coefficient of monomial
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-int MakeMono(Polynomial *poly, const long deg, const double coeff);
+int MakeMono(Polynomial *poly, const long deg, const double complex coeff);
 
 /**
  * @brief Clean polynomial
@@ -70,6 +72,14 @@ void SetVar(Polynomial *poly, const char var);
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int PrintFmt(const char *format, ...);
+
+/**
+ * @brief Print polynomial
+ * 
+ * @param poly Polynomial to print
+ * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
+ */
+int PrintPoly(const Polynomial poly);
 
 /**
  * @brief Degree of poly
@@ -108,7 +118,7 @@ int Copy(const Polynomial poly1, Polynomial *poly);
  * @param poly Polynomial
  * @return double Leading coefficient of poly
  */
-double LC(const Polynomial poly);
+double complex LC(const Polynomial poly);
 
 /**
  * @brief Leading term of polynomial
@@ -126,7 +136,7 @@ int LT(const Polynomial poly, Polynomial *lt);
  * @param a Value to substitute
  * @return double poly(a)
  */
-double Substitute(const Polynomial poly, const double a);
+double complex Substitute(const Polynomial poly, const double complex a);
 
 /**
  * @brief Add two polynomials. poly <- poly1 + poly2
@@ -166,7 +176,7 @@ int MulPoly(const Polynomial poly1, const Polynomial poly2, Polynomial *poly);
  * @param poly Polynomial to be multiplied
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
-int MulScalar(const double scalar, const Polynomial poly1, Polynomial *poly);
+int MulScalar(const double complex scalar, const Polynomial poly1, Polynomial *poly);
 
 /**
  * @brief Negativize polynomial. poly1 <- -poly
@@ -218,6 +228,17 @@ int GCD(const Polynomial poly1, const Polynomial poly2, Polynomial *d);
  * @return int EXIT_SUCCESS if something error did not occur, EXIT_FAILURE else
  */
 int MaclaurinExp(const int func_name, const long deg, Polynomial *poly);
+
+/**
+ * @brief 
+ * 
+ * @param n 
+ * @param omega 
+ * @param a 
+ * @param alpha 
+ * @return int 
+ */
+int FFT(const long n, const double complex omega, const Polynomial a, Polynomial* alpha);
 
 /**
  * @brief Test if poly is monomial or not

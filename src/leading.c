@@ -3,12 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <complex.h>
 
-double LC(const Polynomial poly)
+double complex LC(const Polynomial poly)
 {
     for (long i = poly.deg; i >= 0; --i)
     {
-        if (poly.coeff[i] != 0)
+        if (cabs(poly.coeff[i]) > EPSILON)
         {
             return poly.coeff[i];
         }
