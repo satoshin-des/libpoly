@@ -108,6 +108,7 @@ int FFT(const long n, const double complex omega, const Polynomial a, Polynomial
             tmp = omega_i * gamma.coeff[i];
             alpha->coeff[i] = beta.coeff[i] + tmp;
             alpha->coeff[i + t] = beta.coeff[i] - tmp;
+            omega_i *= omega;
         }
 
         FreePoly(&beta);
